@@ -4,6 +4,10 @@
   "package": "com.chaotic_loom.easy_modpack.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CreativeModeTabMixin",
+    "ItemStackMixin",
+    "LootContainerMixins$ContainerEntityMixin",
+    "LootContainerMixins$RandomizableContainerBlockEntityMixin",
     "MerchantOffersMixin",
     "RecipeManagerMixin",
     "ServerPlayerMixin"

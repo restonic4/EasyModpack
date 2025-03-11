@@ -1,0 +1,17 @@
+{
+  "disabled_info": "Here you can delete items from the game",
+  "disabled": [
+    "minecraft:emerald",
+    "minecraft:spire_armor_trim_smithing_template",
+    "minecraft:rotten_flesh",
+    "minecraft:bone",
+    "minecraft:gunpowder"
+  ],
+  "disabled_usage_info": "Here you disable item abilities, such as preventing throwing a snow ball, etc",
+  "disabled_usage": [
+    "minecraft:ender_pearl",
+    "minecraft:ender_eye",
+    "minecraft:bow",
+    "minecraft:painting"
+  ]
+}

@@ -5,69 +5,90 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
     @Redirect(
-            method = "apply",
+            method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lcom/google/common/collect/ImmutableMap$Builder;put(Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableMap$Builder;"
             )
     )
-    private ImmutableMap.Builder<ResourceLocation, Recipe<?>> redirectPut(ImmutableMap.Builder<ResourceLocation, Recipe<?>> builder, Object key, Object value) {
+    private ImmutableMap.Builder<ResourceLocation, Recipe<?>> redirectPut(ImmutableMap.Builder<ResourceLocation, Recipe<?>> builder, Object key, Object value, @Local Map.Entry<ResourceLocation, JsonElement> entry) {
         ResourceLocation recipeId = (ResourceLocation) key;
         Recipe<?> recipe = (Recipe<?>) value;
 
-        // Verificar si la receta está deshabilitada
         if (isRecipeDisabled(recipeId)) {
             return builder;
         }
 
-        // Obtener el ítem resultante de la receta
-        RegistryAccess registryAccess = RegistryAccess.EMPTY;
-        ItemStack resultStack = recipe.getResultItem(registryAccess);
-        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(resultStack.getItem());
+        ResourceLocation resultItemId = getResultItemId(entry.getValue());
+        if (resultItemId != null && isItemDisabled(resultItemId)) {
+            return builder;
+        }
 
-        System.out.println(itemId);
-
-        // Si el ítem está deshabilitado, se omite la inserción
-        if (isItemDisabled(itemId)) {
+        if (hasDisabledIngredients(recipe)) {
             return builder;
         }
 
         builder.put(recipeId, recipe);
         return builder;
+    }
+
+    @Unique
+    private ResourceLocation getResultItemId(JsonElement jsonElement) {
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+        if (jsonObject.has("result")) {
+            JsonElement result = jsonObject.get("result");
+
+            if (result.isJsonObject()) {
+                return new ResourceLocation(result.getAsJsonObject().get("item").getAsString());
+            } else {
+                return new ResourceLocation(result.getAsString());
+            }
+        } else if (jsonObject.has("template")) {
+            JsonElement template = jsonObject.get("template");
+
+            return new ResourceLocation(template.getAsJsonObject().get("item").getAsString());
+        } else {
+            System.out.println("RESULT NOT FOUND");
+            System.out.println(jsonElement);
+        }
+
+        return null;
+    }
+
+    @Unique
+    private boolean hasDisabledIngredients(Recipe<?> recipe) {
+        for (Ingredient ingredient : recipe.getIngredients()) {
+            for (ItemStack stack : ingredient.getItems()) {
+                ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                if (isItemDisabled(itemId)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Unique

@@ -23,18 +23,7 @@ public class ServerPlayerMixin {
         ItemStack item = player.getInventory().getItem(i);
 
         if (ItemManager.isDisabled(item.getItem())) {
-            //item.setCount(0);
+            item.setCount(0);
         }
     }
-
-    // Item cancel use
-    /*@Inject(method = "attack", at = @At("HEAD"), cancellable = true)
-    private void cancelItemUse(Entity entity, CallbackInfo ci) {
-        ServerPlayer player = (ServerPlayer) (Object) this;
-        Item item = player.getMainHandItem().getItem();
-
-        if () {
-            ci.cancel();
-        }
-    }*/
 }

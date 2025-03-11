@@ -19,6 +19,9 @@
     ],
     "main": [
       "com.chaotic_loom.easy_modpack.EasyModpack"
+    ],
+    "rei_client": [
+      "com.chaotic_loom.easy_modpack.compatibility.rei.REIPlugin"
     ]
   },
   "mixins": [
