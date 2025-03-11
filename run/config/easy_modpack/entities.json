@@ -1,0 +1,4 @@
+{
+  "disabled_info": "Here you can delete entities from the game",
+  "disabled": ["minecraft:creeper"]
+}
