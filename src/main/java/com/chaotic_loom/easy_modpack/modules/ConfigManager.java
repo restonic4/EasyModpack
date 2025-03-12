@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import com.mojang.datafixers.util.Pair;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -143,6 +144,21 @@ public class ConfigManager {
         if (userConfig != null && userConfig.has(key) && userConfig.get(key).isJsonArray()) {
             JsonArray array = userConfig.getAsJsonArray(key);
             array.forEach(element -> result.add(element.getAsString()));
+        }
+        return result;
+    }
+
+    public static List<Pair<String, String>> getConfigPairArray(String configName, String key) {
+        JsonObject userConfig = CONFIG_CACHE.get(configName);
+        List<Pair<String, String>> result = new ArrayList<>();
+        if (userConfig != null && userConfig.has(key) && userConfig.get(key).isJsonArray()) {
+            JsonArray array = userConfig.getAsJsonArray(key);
+
+            array.forEach(element -> {
+                JsonArray pair = element.getAsJsonArray();
+
+                result.add(new Pair<>(pair.get(0).getAsString(), pair.get(1).getAsString()));
+            });
         }
         return result;
     }

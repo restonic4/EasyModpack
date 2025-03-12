@@ -10,6 +10,10 @@ base {
     archivesName = project.archives_base_name
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/mod.accesswidener")
+}
+
 repositories {
     maven { url 'https://api.modrinth.com/maven' }
     maven { url "https://maven.shedaniel.me" }

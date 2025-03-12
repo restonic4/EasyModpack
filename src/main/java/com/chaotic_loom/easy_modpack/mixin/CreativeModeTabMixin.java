@@ -20,7 +20,7 @@ public class CreativeModeTabMixin {
     // IDK how but this makes JEI not show the items, cool, not with REI though
     @Inject(method = "buildContents", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/CreativeModeTab;rebuildSearchTree()V"))
     private void removeItems(CreativeModeTab.ItemDisplayParameters displayParameters, CallbackInfo ci) {
-        this.displayItems.removeIf(stack -> ItemManager.isDisabled(stack.getItem()));
-        this.displayItemsSearchTab.removeIf(stack -> ItemManager.isDisabled(stack.getItem()));
+        //this.displayItems.removeIf(stack -> ItemManager.isDisabled(stack.getItem()));
+        //this.displayItemsSearchTab.removeIf(stack -> ItemManager.isDisabled(stack.getItem()));
     }
 }

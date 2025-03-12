@@ -6,18 +6,14 @@ import net.minecraft.world.item.Item;
 
 public class Utils {
     public static Item getItem(String id) {
-        return BuiltInRegistries.ITEM.get(getResourceLocation(id));
+        return BuiltInRegistries.ITEM.get(new ResourceLocation(id));
     }
 
-    public static ResourceLocation getResourceLocation(String id) {
-        String[] split = id.split(":");
+    public static Item getItem(ResourceLocation id) {
+        return BuiltInRegistries.ITEM.get(id);
+    }
 
-        if (split.length == 1) {
-            return new ResourceLocation(id);
-        } else if (split.length == 2) {
-            return new ResourceLocation(split[0], split[1]);
-        }
-
-        return new ResourceLocation(id);
+    public static ResourceLocation getItemLocation(Item item) {
+        return BuiltInRegistries.ITEM.getKey(item);
     }
 }

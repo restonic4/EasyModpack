@@ -27,6 +27,7 @@
   "mixins": [
     "easy_modpack.mixins.json"
   ],
+  "accessWidener": "mod.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

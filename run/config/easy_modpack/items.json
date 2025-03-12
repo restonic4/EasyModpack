@@ -4,8 +4,9 @@
     "minecraft:emerald",
     "minecraft:spire_armor_trim_smithing_template",
     "minecraft:rotten_flesh",
-    "minecraft:bone",
-    "minecraft:gunpowder"
+    "minecraft:gunpowder",
+    "minecraft:iron_block",
+    "minecraft:oak_planks"
   ],
   "disabled_usage_info": "Here you disable item abilities, such as preventing throwing a snow ball, etc",
   "disabled_usage": [
@@ -13,5 +14,20 @@
     "minecraft:ender_eye",
     "minecraft:bow",
     "minecraft:painting"
+  ],
+  "replace_info": "Here you replace items with others. The first is the one that is going to be replaced",
+  "replace": [
+    [
+      "minecraft:oak_log",
+      "minecraft:sand"
+    ],
+    [
+      "minecraft:oak_planks",
+      "minecraft:gravel"
+    ],
+    [
+      "minecraft:bone",
+      "minecraft:dirt"
+    ]
   ]
 }

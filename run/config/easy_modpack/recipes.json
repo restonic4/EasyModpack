@@ -1,4 +1,4 @@
 {
   "disabled_info": "Here you can delete recipes from the game",
-  "disabled": ["minecraft:acacia_boat"]
+  "disabled": ["minecraft:acacia_boat", "minecraft:diamond_block"]
 }

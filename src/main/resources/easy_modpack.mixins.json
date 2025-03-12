@@ -11,7 +11,8 @@
     "LootContainerMixins$RandomizableContainerBlockEntityMixin",
     "MerchantOffersMixin",
     "RecipeManagerMixin",
-    "ServerPlayerMixin"
+    "ServerPlayerMixin",
+    "accessors.IngredientAccessor",
   ],
   "client": [
   ],
