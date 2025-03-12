@@ -25,14 +25,14 @@ public class ServerPlayerMixin {
         ItemStack item = player.getInventory().getItem(i);
 
         if (ItemManager.isDisabled(item.getItem())) {
-            //item.setCount(0);
-        } /*else if (ItemManager.hasReplacement(Utils.getItemLocation(item.getItem()))) {
+            item.setCount(0);
+        } else if (ItemManager.hasReplacement(Utils.getItemLocation(item.getItem()))) {
             ResourceLocation replacement = ItemManager.getReplacement(Utils.getItemLocation(item.getItem()));
 
             ItemStack newItemStack = new ItemStack(Utils.getItem(replacement));
             newItemStack.setCount(item.getCount());
 
             player.getInventory().setItem(i, newItemStack);
-        }*/
+        }
     }
 }

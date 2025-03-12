@@ -10,9 +10,9 @@
     "LootContainerMixins$ContainerEntityMixin",
     "LootContainerMixins$RandomizableContainerBlockEntityMixin",
     "MerchantOffersMixin",
-    "RecipeManagerMixin",
+    "ReloadableServerResourcesMixin",
     "ServerPlayerMixin",
-    "accessors.IngredientAccessor",
+    "accessors.RecipeManagerAccessor"
   ],
   "client": [
   ],
