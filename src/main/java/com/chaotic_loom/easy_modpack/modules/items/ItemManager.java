@@ -2,6 +2,7 @@ package com.chaotic_loom.easy_modpack.modules.items;
 
 import com.chaotic_loom.easy_modpack.Constants;
 import com.chaotic_loom.easy_modpack.modules.ConfigManager;
+import com.chaotic_loom.easy_modpack.modules.Utils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -82,6 +83,22 @@ public class ItemManager {
 
             if (ItemManager.isDisabled(itemStack.getItem())) {
                 container.removeItem(i, itemStack.getCount());
+            }
+        }
+    }
+
+    public static void replaceItems(Container container) {
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            ItemStack itemStack = container.getItem(i);
+            ResourceLocation itemID = Utils.getItemLocation(itemStack.getItem());
+
+            if (ItemManager.hasReplacement(itemID)) {
+                Item item = Utils.getItem(getReplacement(itemID));
+
+                ItemStack newItemStack = new ItemStack(item);
+                Utils.copyItemStackProperties(itemStack, newItemStack);
+
+                container.setItem(i, newItemStack);
             }
         }
     }

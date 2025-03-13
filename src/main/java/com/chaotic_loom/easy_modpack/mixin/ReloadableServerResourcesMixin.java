@@ -40,7 +40,7 @@ public class ReloadableServerResourcesMixin {
 
         originalFlatMap.forEach((recipeId, recipe) -> {
             Recipe<?> modifiedRecipe = replaceIngredientsInRecipe(recipe, registryManager);
-            modifiedRecipe = replaceResultInRecipe(modifiedRecipe, registryManager); // Nueva línea para reemplazar resultado
+            modifiedRecipe = replaceResultInRecipe(modifiedRecipe, registryManager);
             if (shouldRemoveRecipe(registryManager, recipeId, modifiedRecipe)) {
                 return;
             }

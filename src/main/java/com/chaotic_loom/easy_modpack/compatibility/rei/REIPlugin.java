@@ -14,7 +14,7 @@ public class REIPlugin implements REIClientPlugin {
         Stream<EntryStack<?>> stacks = EntryRegistry.getInstance().getEntryStacks();
 
         stacks.forEach(entryStack -> {
-            if (ItemManager.isDisabled(entryStack.getIdentifier())) {
+            if (ItemManager.isDisabled(entryStack.getIdentifier()) | ItemManager.hasReplacement(entryStack.getIdentifier())) {
                 rule.hide(entryStack);
             }
         });

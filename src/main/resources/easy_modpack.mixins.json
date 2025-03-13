@@ -7,11 +7,13 @@
     "CreativeModeTabMixin",
     "ItemEntityMixin",
     "ItemStackMixin",
+    "LevelChunkSectionMixin",
     "LootContainerMixins$ContainerEntityMixin",
     "LootContainerMixins$RandomizableContainerBlockEntityMixin",
     "MerchantOffersMixin",
     "ReloadableServerResourcesMixin",
     "ServerPlayerMixin",
+    "WorldGenRegionMixin",
     "accessors.RecipeManagerAccessor"
   ],
   "client": [

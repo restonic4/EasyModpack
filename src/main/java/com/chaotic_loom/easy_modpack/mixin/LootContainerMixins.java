@@ -26,6 +26,7 @@ public class LootContainerMixins {
         )
         private void onUnpackLootTable(Player player, CallbackInfo ci) {
             ItemManager.removeDisabledItems((Container) (Object) this);
+            ItemManager.replaceItems((Container) (Object) this);
         }
     }
 
@@ -41,6 +42,7 @@ public class LootContainerMixins {
         )
         private void unpackChestVehicleLootTable(Player player, CallbackInfo ci) {
             ItemManager.removeDisabledItems((Container) (Object) this);
+            ItemManager.replaceItems((Container) (Object) this);
         }
     }
 }

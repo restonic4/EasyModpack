@@ -10,6 +10,9 @@
   "replace_info": "Here you replace items with others. The first is the one that is going to be replaced",
   "replace": [
     ["minecraft:oak_planks", "minecraft:gravel"],
-    ["minecraft:emerald", "minecraft:dirt"]
+    ["minecraft:emerald", "minecraft:dirt"],
+    ["minecraft:bone", "minecraft:bedrock"],
+    ["minecraft:rotten_flesh", "minecraft:bedrock"],
+    ["minecraft:string", "minecraft:bedrock"]
   ]
 }

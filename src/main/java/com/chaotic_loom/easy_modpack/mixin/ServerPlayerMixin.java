@@ -30,7 +30,7 @@ public class ServerPlayerMixin {
             ResourceLocation replacement = ItemManager.getReplacement(Utils.getItemLocation(item.getItem()));
 
             ItemStack newItemStack = new ItemStack(Utils.getItem(replacement));
-            newItemStack.setCount(item.getCount());
+            Utils.copyItemStackProperties(item, newItemStack);
 
             player.getInventory().setItem(i, newItemStack);
         }
