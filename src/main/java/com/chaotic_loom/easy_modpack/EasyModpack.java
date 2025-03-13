@@ -1,6 +1,7 @@
 package com.chaotic_loom.easy_modpack;
 
 import com.chaotic_loom.easy_modpack.modules.ConfigManager;
+import com.chaotic_loom.easy_modpack.modules.biomes.BiomeManager;
 import com.chaotic_loom.easy_modpack.modules.blocks.BlockManager;
 import com.chaotic_loom.easy_modpack.modules.entities.EntitiesManager;
 import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
@@ -29,11 +30,13 @@ public class EasyModpack implements ModInitializer {
         ConfigManager.initConfig("recipes");
         ConfigManager.initConfig("entities");
         ConfigManager.initConfig("blocks");
+        ConfigManager.initConfig("biomes");
 
         ItemManager.register();
         RecipeManager.register();
         EntitiesManager.register();
         BlockManager.register();
+        BiomeManager.register();
 
         configLoaded = true;
     }

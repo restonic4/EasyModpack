@@ -6,14 +6,23 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,21 +48,20 @@ public class Utils {
         return BuiltInRegistries.BLOCK.getKey(block);
     }
 
-    public static <T> Set<ResourceLocation> getTagElements(Registry<T> registry, String tagString) {
-        // Construir la TagKey a partir del identificador del registro y la tag proporcionada.
-        TagKey<T> tagKey = TagKey.create(registry.key(), new ResourceLocation(tagString));
+    public static ResourceLocation getEntityLocation(Entity entity) {
+        return BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+    }
 
-        // Obtener la lista de entradas para esa tag; puede no estar presente.
-        HolderSet<T> tagEntries = registry.getTag(tagKey).orElse(null);
-        if (tagEntries == null) {
-            return Set.of();
-        }
+    public static Entity getEntity(ResourceLocation id, ServerLevel serverLevel, Vec3 position) {
+        EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(id);
 
-        // Mapear cada entrada a su Identifier (ResourceLocation) y colectarlo en un Set.
-        return tagEntries.stream()
-                .map(Holder::value)
-                .map(registry::getKey)
-                .collect(Collectors.toSet());
+        CompoundTag compoundTag = new CompoundTag();
+        compoundTag.putString("id", id.toString());
+
+        return EntityType.loadEntityRecursive(compoundTag, serverLevel, finalEntity -> {
+            finalEntity.moveTo(position.x, position.y, position.z, finalEntity.getYRot(), finalEntity.getXRot());
+            return finalEntity;
+        });
     }
 
     public static void copyItemStackProperties(ItemStack old, ItemStack newStack) {

@@ -24,6 +24,16 @@
       "com.chaotic_loom.easy_modpack.compatibility.rei.REIPlugin"
     ]
   },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/organization/chaotic-loom"
+      },
+      "badges": [
+        "chaotic_loom"
+      ]
+    }
+  },
   "mixins": [
     "easy_modpack.mixins.json"
   ],

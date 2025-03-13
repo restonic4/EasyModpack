@@ -1,0 +1,9 @@
+{
+  "disabled_info": "Here you can delete blocks from the game",
+  "disabled": ["minecraft:basalt_deltas"],
+
+  "replace_info": "Here you replace blocks with others. The first is the one that is going to be replaced",
+  "replace": [
+    ["minecraft:desert", "minecraft:warped_forest"]
+  ]
+}

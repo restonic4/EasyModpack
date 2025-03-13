@@ -1,7 +1,7 @@
 {
   "disabled_info": "Here you can delete items from the game",
   "disabled": [
-    "minecraft:wawawawawwawawawawawwawawaawwawawwawwawawawwawa"
+
   ],
   "disabled_usage_info": "Here you disable item abilities, such as preventing throwing a snow ball, etc",
   "disabled_usage": [
@@ -9,10 +9,6 @@
   ],
   "replace_info": "Here you replace items with others. The first is the one that is going to be replaced",
   "replace": [
-    ["minecraft:oak_planks", "minecraft:gravel"],
-    ["minecraft:emerald", "minecraft:dirt"],
-    ["minecraft:bone", "minecraft:bedrock"],
-    ["minecraft:rotten_flesh", "minecraft:bedrock"],
-    ["minecraft:string", "minecraft:bedrock"]
+
   ]
 }

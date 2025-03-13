@@ -14,7 +14,8 @@
     "ReloadableServerResourcesMixin",
     "ServerPlayerMixin",
     "WorldGenRegionMixin",
-    "accessors.RecipeManagerAccessor"
+    "accessors.RecipeManagerAccessor",
+    "biome.MultiNoiseBiomeSourceMixin"
   ],
   "client": [
   ],
