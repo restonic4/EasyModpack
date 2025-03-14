@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.Unique;
 
 import java.util.ArrayList;
 
+/*
+Disabled and replaces villagers (Or other modded traders, probably...) trades and items.
+ */
 @Mixin(MerchantOffers.class)
 public class MerchantOffersMixin extends ArrayList<MerchantOffer> {
     @Override

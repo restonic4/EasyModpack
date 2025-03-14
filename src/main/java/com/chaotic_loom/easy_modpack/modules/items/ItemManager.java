@@ -1,6 +1,5 @@
 package com.chaotic_loom.easy_modpack.modules.items;
 
-import com.chaotic_loom.easy_modpack.Constants;
 import com.chaotic_loom.easy_modpack.modules.ConfigManager;
 import com.chaotic_loom.easy_modpack.modules.Utils;
 import com.mojang.datafixers.util.Pair;

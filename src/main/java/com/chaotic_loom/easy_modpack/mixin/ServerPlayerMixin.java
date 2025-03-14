@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/*
+Replaces and deletes items from player inventories
+ */
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin {
     @Inject(

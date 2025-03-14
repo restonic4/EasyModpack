@@ -8,6 +8,9 @@ import me.shedaniel.rei.api.common.entry.EntryStack;
 
 import java.util.stream.Stream;
 
+/*
+Hides disabled items on REI
+ */
 public class REIPlugin implements REIClientPlugin {
     @Override
     public void registerBasicEntryFiltering(BasicFilteringRule<?> rule) {

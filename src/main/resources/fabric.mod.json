@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.chaotic_loom.easy_modpack.EasyModpackClient"
+
     ],
     "main": [
       "com.chaotic_loom.easy_modpack.EasyModpack"

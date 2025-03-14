@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/*
+Replaces biomes
+ */
 @Mixin(MultiNoiseBiomeSource.class)
 public class MultiNoiseBiomeSourceMixin {
     @Unique
@@ -39,7 +42,7 @@ public class MultiNoiseBiomeSourceMixin {
         List<Pair<Climate.ParameterPoint, Holder<Biome>>> originalValues = parameterList.values();
         List<Pair<Climate.ParameterPoint, Holder<Biome>>> newValues = new ArrayList<>();
 
-        // Bioma predeterminado para reemplazar biomas deshabilitados (plains)
+        // Default biome to replace disabled biomes (plains)
         ResourceLocation plainsBiomeId = new ResourceLocation("minecraft", "plains");
 
         for (Pair<Climate.ParameterPoint, Holder<Biome>> pair : originalValues) {
@@ -51,31 +54,31 @@ public class MultiNoiseBiomeSourceMixin {
                 ResourceLocation biomeId = biomeKey.get().location();
 
                 if (isBiomeDisabled(biomeId)) {
-                    // Si el bioma está deshabilitado, lo reemplazamos por plains
+                    // If the biome is disabled, replace it with plains
                     Holder<Biome> replacementBiome = findBiomeByResourceLocation(plainsBiomeId);
                     if (replacementBiome != null) {
                         newValues.add(Pair.of(parameterPoint, replacementBiome));
                     } else {
-                        // Si no podemos encontrar plains, mantenemos el bioma original
+                        // If plains cannot be found, keep the original biome
                         newValues.add(pair);
                     }
                 } else if (shouldBiomeBeReplaced(biomeId)) {
-                    // Si el bioma debe ser reemplazado, buscamos el bioma de reemplazo
+                    // If the biome should be replaced, find its replacement
                     ResourceLocation replacementBiomeId = getBiomeReplacement(biomeId);
                     Holder<Biome> replacementBiome = findBiomeByResourceLocation(replacementBiomeId);
 
                     if (replacementBiome != null) {
                         newValues.add(Pair.of(parameterPoint, replacementBiome));
                     } else {
-                        // Si no se encuentra el bioma de reemplazo, mantenemos el original
+                        // If the replacement biome is not found, keep the original
                         newValues.add(pair);
                     }
                 } else {
-                    // Si no hay ningún cambio que hacer, mantenemos el bioma original
+                    // If no changes are needed, keep the original biome
                     newValues.add(pair);
                 }
             } else {
-                // Si no podemos obtener la clave del bioma, mantenemos el par original
+                // If the biome key cannot be obtained, keep the original pair
                 newValues.add(pair);
             }
         }
@@ -85,10 +88,10 @@ public class MultiNoiseBiomeSourceMixin {
 
     @Unique
     private static Holder<Biome> findBiomeByResourceLocation(ResourceLocation biomeId) {
-        // Intentamos obtener el MinecraftServer para acceder a los registros
         MinecraftServer server = getServer();
+
         if (server != null) {
-            // Obtenemos el registro de biomas
+            // Retrieve the biome registry
             return server.registryAccess().registryOrThrow(Registries.BIOME).getHolder(
                     ResourceKey.create(Registries.BIOME, biomeId)
             ).orElse(null);

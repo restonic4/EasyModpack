@@ -14,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Collection;
 import java.util.Set;
 
+/*
+Deletes items from creative tabs
+ */
 @Mixin(CreativeModeTab.class)
 public class CreativeModeTabMixin {
     @Shadow private Collection<ItemStack> displayItems;

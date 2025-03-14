@@ -22,7 +22,6 @@ public class RecipeManager {
         for (String recipeID : disabledRecipesRaw) {
             disabledRecipes.add(new ResourceLocation(recipeID));
         }
-
     }
 
     public static boolean isDisabled(ResourceLocation location){

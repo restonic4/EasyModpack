@@ -2,20 +2,20 @@ package com.chaotic_loom.easy_modpack.mixin;
 
 import com.chaotic_loom.easy_modpack.modules.Utils;
 import com.chaotic_loom.easy_modpack.modules.blocks.BlockManager;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.chunk.ChunkAccess;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
+/*
+Replaces blocks on structures and features.
+ */
 @Mixin(WorldGenRegion.class)
 public class WorldGenRegionMixin {
     @ModifyVariable(method = "setBlock", at = @At("HEAD"), argsOnly = true)

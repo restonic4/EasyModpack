@@ -13,9 +13,6 @@ import java.util.Map;
 @Mixin(RecipeManager.class)
 public interface RecipeManagerAccessor {
     @Accessor("recipes")
-    Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> getRecipes();
-
-    @Accessor("recipes")
     @Mutable
     void setRecipes(Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes);
 

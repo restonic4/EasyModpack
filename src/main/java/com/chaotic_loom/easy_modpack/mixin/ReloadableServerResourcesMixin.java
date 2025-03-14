@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
+Disables and replaces recipes and it's ingredients
+ */
 @Mixin(ReloadableServerResources.class)
 public class ReloadableServerResourcesMixin {
     @Shadow @Final private RecipeManager recipes;

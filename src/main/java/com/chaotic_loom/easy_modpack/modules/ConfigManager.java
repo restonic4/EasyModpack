@@ -40,10 +40,10 @@ public class ConfigManager {
     }
 
     /**
-     * Inicializa la configuración copiando el archivo por defecto desde el jar si no existe,
-     * y carga en memoria la configuración ya fusionada con la plantilla por defecto.
+     * Initializes the configuration by copying the default template from the JAR if it does not exist.
+     * It then loads and merges the configuration with the default template.
      *
-     * @param configName nombre base de la configuración (por ejemplo, "items")
+     * @param configName The base name of the configuration (e.g., "items").
      */
     public static void initConfig(String configName) {
         try {
@@ -54,7 +54,7 @@ public class ConfigManager {
             if (!Files.exists(configFile)) {
                 try (InputStream in = ConfigManager.class.getResourceAsStream(getDefaultConfigFileName(configName))) {
                     if (in == null) {
-                        throw new IOException("No se encontró el recurso por defecto: " + getDefaultConfigFileName(configName));
+                        throw new IOException("Default resource not found: " + getDefaultConfigFileName(configName));
                     }
                     Files.copy(in, configFile);
                 }
@@ -68,10 +68,10 @@ public class ConfigManager {
     }
 
     /**
-     * Carga la configuración desde un archivo utilizando Gson.
+     * Loads a configuration file using Gson.
      *
-     * @param configFile Path al archivo de configuración.
-     * @return JsonObject con la configuración o un objeto vacío en caso de error.
+     * @param configFile The path to the configuration file.
+     * @return A JsonObject containing the configuration, or an empty object in case of an error.
      */
     private static JsonObject loadConfig(Path configFile) {
         try (Reader reader = new FileReader(configFile.toFile())) {
@@ -83,13 +83,13 @@ public class ConfigManager {
     }
 
     /**
-     * Carga la configuración del usuario y la fusiona con la plantilla por defecto.
-     * Si alguna clave de la plantilla no existe en la configuración del usuario,
-     * se agrega y se actualiza el archivo.
+     * Loads the user configuration and merges it with the default template.
+     * If any keys from the template are missing in the user's configuration,
+     * they are added and the file is updated.
      *
-     * @param configFile Path al archivo de configuración del usuario.
-     * @param configName Nombre base de la configuración.
-     * @return JsonObject resultante de la fusión.
+     * @param configFile The path to the user's configuration file.
+     * @param configName The base name of the configuration.
+     * @return A JsonObject containing the merged configuration.
      */
     private static JsonObject loadAndMergeConfig(Path configFile, String configName) {
         JsonObject userConfig = loadConfig(configFile);
@@ -116,10 +116,10 @@ public class ConfigManager {
     }
 
     /**
-     * Guarda el JsonObject de configuración en el archivo correspondiente.
+     * Saves a configuration JsonObject to the corresponding file.
      *
-     * @param configName Nombre base de la configuración.
-     * @param config     JsonObject de configuración.
+     * @param configName The base name of the configuration.
+     * @param config     The JsonObject containing the configuration data.
      */
     private static void saveConfig(String configName, JsonObject config) {
         Path configFile = CONFIG_FOLDER.resolve(getConfigFileName(configName));
@@ -131,12 +131,11 @@ public class ConfigManager {
     }
 
     /**
-     * Obtiene un array de strings correspondiente a la key especificada.
-     * Se consulta la configuración cargada en memoria.
+     * Retrieves an array of strings for the specified key from the cached configuration.
      *
-     * @param configName nombre base de la configuración (por ejemplo, "items")
-     * @param key        la key a leer (por ejemplo, "disabled")
-     * @return lista de strings asociada a la key, o una lista vacía en caso de error.
+     * @param configName The base name of the configuration (e.g., "items").
+     * @param key        The key to retrieve the values from (e.g., "disabled").
+     * @return A list of strings associated with the key, or an empty list if an error occurs.
      */
     public static List<String> getConfigArray(String configName, String key) {
         JsonObject userConfig = CONFIG_CACHE.get(configName);
@@ -148,6 +147,13 @@ public class ConfigManager {
         return result;
     }
 
+    /**
+     * Retrieves an array of string pairs from the specified key in the cached configuration.
+     *
+     * @param configName The base name of the configuration.
+     * @param key        The key to retrieve the values from.
+     * @return A list of pairs (key-value strings) associated with the specified key.
+     */
     public static List<Pair<String, String>> getConfigPairArray(String configName, String key) {
         JsonObject userConfig = CONFIG_CACHE.get(configName);
         List<Pair<String, String>> result = new ArrayList<>();

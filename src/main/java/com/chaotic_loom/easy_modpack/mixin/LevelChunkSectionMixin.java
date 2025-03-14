@@ -15,6 +15,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/*
+Replaces blocks on terrain generation and other cases
+
+TODO: Sometimes blocks gets de-sync, for example, a tree growing (Replace log with other block)
+TODO: Maybe WorldGenRegionMixin is not needed.
+ */
 @Mixin(LevelChunkSection.class)
 public abstract class LevelChunkSectionMixin {
 

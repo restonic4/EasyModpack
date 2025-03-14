@@ -13,6 +13,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/*
+Replaces items when a loot table is generated on block entities and regular entities
+ */
 public class LootContainerMixins {
     @Mixin(RandomizableContainerBlockEntity.class)
     public abstract static class RandomizableContainerBlockEntityMixin {
