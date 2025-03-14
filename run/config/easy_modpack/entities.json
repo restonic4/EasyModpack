@@ -1,12 +1,9 @@
 {
   "disabled_info": "Here you can delete entities from the game",
-  "disabled": [],
+  "disabled": ["minecraft:super_weird_entity", "weird_mod:magic_super_cool_entity"],
 
   "replace_info": "Here you replace entities with others. The first is the one that is going to be replaced",
   "replace": [
-    ["minecraft:creeper", "minecraft:cat"],
-    ["minecraft:cat", "minecraft:cow"],
-    ["minecraft:cow", "minecraft:sheep"],
-    ["minecraft:sheep", "minecraft:zombie"]
+    ["minecraft:super_weird_entity", "weird_mod:magic_super_cool_entity"]
   ]
 }

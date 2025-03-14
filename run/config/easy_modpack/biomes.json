@@ -1,9 +1,8 @@
 {
-  "disabled_info": "Here you can delete blocks from the game",
-  "disabled": ["minecraft:jungle"],
+  "disabled_info": "Here you can delete biomes from the game",
+  "disabled": [],
 
-  "replace_info": "Here you replace blocks with others. The first is the one that is going to be replaced",
+  "replace_info": "Here you replace biomes with others. The first is the one that is going to be replaced",
   "replace": [
-    ["minecraft:basalt_deltas", "minecraft:desert"]
   ]
 }

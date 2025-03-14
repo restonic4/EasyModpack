@@ -1,14 +1,12 @@
 {
   "disabled_info": "Here you can delete items from the game",
-  "disabled": [
+  "disabled": ["minecraft:super_weird_item", "weird_mod:magic_super_cool_sand"],
 
-  ],
   "disabled_usage_info": "Here you disable item abilities, such as preventing throwing a snow ball, etc",
-  "disabled_usage": [
+  "disabled_usage": ["minecraft:super_weird_item", "weird_mod:magic_super_cool_sand"],
 
-  ],
   "replace_info": "Here you replace items with others. The first is the one that is going to be replaced",
   "replace": [
-
+    ["minecraft:super_weird_item", "weird_mod:magic_super_cool_sand"]
   ]
 }
