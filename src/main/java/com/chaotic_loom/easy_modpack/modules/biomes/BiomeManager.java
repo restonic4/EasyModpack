@@ -2,8 +2,10 @@ package com.chaotic_loom.easy_modpack.modules.biomes;
 
 import com.chaotic_loom.easy_modpack.modules.ConfigManager;
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 {
-  "disabled_info": "Here you can delete blocks from the game",
+  "disabled_info": "Here you can delete biomes from the game",
   "disabled": ["minecraft:super_weird_biome", "weird_mod:magic_super_cool_biome"],
 
-  "replace_info": "Here you replace blocks with others. The first is the one that is going to be replaced",
+  "replace_info": "Here you replace biomes with others. The first is the one that is going to be replaced",
   "replace": [
     ["minecraft:super_weird_biome", "weird_mod:magic_super_cool_biome"]
   ]

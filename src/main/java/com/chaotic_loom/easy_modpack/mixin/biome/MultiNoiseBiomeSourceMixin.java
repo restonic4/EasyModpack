@@ -1,9 +1,12 @@
 package com.chaotic_loom.easy_modpack.mixin.biome;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
@@ -13,49 +16,89 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Mixin(MultiNoiseBiomeSource.class)
 public class MultiNoiseBiomeSourceMixin {
-    @Inject(
-            method = "getNoiseBiome(IIILnet/minecraft/world/level/biome/Climate$Sampler;)Lnet/minecraft/core/Holder;",
-            at = @At("RETURN"),
-            cancellable = true
-    )
-    private void onGetNoiseBiome(
-            int x, int y, int z,
-            Climate.Sampler sampler,
-            CallbackInfoReturnable<Holder<Biome>> cir
-    ) {
-        Holder<Biome> originalBiome = cir.getReturnValue();
-        originalBiome.unwrapKey().ifPresent(biomeKey -> {
-            ResourceLocation biomeId = biomeKey.location();
+    @Unique
+    private Climate.ParameterList<Holder<Biome>> filteredParameters;
 
-            if (isBiomeDisabled(biomeId)) {
-                replaceBiome(cir, "minecraft:plains");
-            } else if (shouldBiomeBeReplaced(biomeId)) {
-                ResourceLocation replacementId = getBiomeReplacement(biomeId);
-                replaceBiome(cir, replacementId.toString());
-            }
-        });
+    @Inject(method = "parameters", at = @At("TAIL"), cancellable = true)
+    private void parameters(CallbackInfoReturnable<Climate.ParameterList<Holder<Biome>>> cir) {
+        if (this.filteredParameters == null) {
+            this.filteredParameters = replaceBiomes(cir.getReturnValue());
+        }
+
+        cir.setReturnValue(this.filteredParameters);
     }
 
     @Unique
-    private void replaceBiome(
-            CallbackInfoReturnable<Holder<Biome>> cir,
-            String replacementId
-    ) {
-        // Usar el registro dinámico (compatible con mods)
-        ResourceLocation replacementLoc = new ResourceLocation(replacementId);
-        ResourceKey<Biome> replacementKey = ResourceKey.create(
-                Registries.BIOME,
-                replacementLoc
-        );
+    private static Climate.ParameterList<Holder<Biome>> replaceBiomes(Climate.ParameterList<Holder<Biome>> parameterList) {
+        List<Pair<Climate.ParameterPoint, Holder<Biome>>> originalValues = parameterList.values();
+        List<Pair<Climate.ParameterPoint, Holder<Biome>>> newValues = new ArrayList<>();
 
-        // Obtener el Holder del bioma de reemplazo desde el registro activo
-        MultiNoiseBiomeSource self = (MultiNoiseBiomeSource) (Object) this;
-        self.possibleBiomes().stream()
-                .filter(holder -> holder.is(replacementKey))
-                .findFirst()
-                .ifPresent(cir::setReturnValue); // Reemplazar si existe
+        // Bioma predeterminado para reemplazar biomas deshabilitados (plains)
+        ResourceLocation plainsBiomeId = new ResourceLocation("minecraft", "plains");
+
+        for (Pair<Climate.ParameterPoint, Holder<Biome>> pair : originalValues) {
+            Climate.ParameterPoint parameterPoint = pair.getFirst();
+            Holder<Biome> biomeHolder = pair.getSecond();
+
+            Optional<ResourceKey<Biome>> biomeKey = biomeHolder.unwrapKey();
+            if (biomeKey.isPresent()) {
+                ResourceLocation biomeId = biomeKey.get().location();
+
+                if (isBiomeDisabled(biomeId)) {
+                    // Si el bioma está deshabilitado, lo reemplazamos por plains
+                    Holder<Biome> replacementBiome = findBiomeByResourceLocation(plainsBiomeId);
+                    if (replacementBiome != null) {
+                        newValues.add(Pair.of(parameterPoint, replacementBiome));
+                    } else {
+                        // Si no podemos encontrar plains, mantenemos el bioma original
+                        newValues.add(pair);
+                    }
+                } else if (shouldBiomeBeReplaced(biomeId)) {
+                    // Si el bioma debe ser reemplazado, buscamos el bioma de reemplazo
+                    ResourceLocation replacementBiomeId = getBiomeReplacement(biomeId);
+                    Holder<Biome> replacementBiome = findBiomeByResourceLocation(replacementBiomeId);
+
+                    if (replacementBiome != null) {
+                        newValues.add(Pair.of(parameterPoint, replacementBiome));
+                    } else {
+                        // Si no se encuentra el bioma de reemplazo, mantenemos el original
+                        newValues.add(pair);
+                    }
+                } else {
+                    // Si no hay ningún cambio que hacer, mantenemos el bioma original
+                    newValues.add(pair);
+                }
+            } else {
+                // Si no podemos obtener la clave del bioma, mantenemos el par original
+                newValues.add(pair);
+            }
+        }
+
+        return new Climate.ParameterList<>(newValues);
+    }
+
+    @Unique
+    private static Holder<Biome> findBiomeByResourceLocation(ResourceLocation biomeId) {
+        // Intentamos obtener el MinecraftServer para acceder a los registros
+        MinecraftServer server = getServer();
+        if (server != null) {
+            // Obtenemos el registro de biomas
+            return server.registryAccess().registryOrThrow(Registries.BIOME).getHolder(
+                    ResourceKey.create(Registries.BIOME, biomeId)
+            ).orElse(null);
+        }
+        return null;
+    }
+
+    @Unique
+    private static MinecraftServer getServer() {
+        return EasyModpack.getCurrentServer();
     }
 
     @Unique
