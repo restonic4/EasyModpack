@@ -32,6 +32,8 @@ Are you tired of different mods repeating elements or unbalancing your pack's pr
 - **Compatibility:** The compatible versions and loader depend on development and demand. If you have any questions, contact me!
 - **Collaboration and Ports:** Do you want to contribute or need a port for another version? I am open to collaborating and keeping Easy Modpack updated. Contact me!
 
+Check the branches to view the source code for each version and loader.
+
 ---
 
 #### Demonstrations
