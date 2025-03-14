@@ -27,7 +27,7 @@ Are you tired of different mods repeating elements or unbalancing your pack's pr
 
 ---
 
-#### Support and Updates
+### Support and Updates
 
 - **Compatibility:** The compatible versions and loader depend on development and demand. If you have any questions, contact me!
 - **Collaboration and Ports:** Do you want to contribute or need a port for another version? I am open to collaborating and keeping Easy Modpack updated. Contact me!
@@ -36,5 +36,14 @@ Check the branches to view the source code for each version and loader.
 
 ---
 
-#### Demonstrations
+### Demonstrations
+
+#### Biome replacer
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px; max-width: 100%;">
+    <img src="assets/biomes.gif" alt="Biomes GIF" style="max-width: 50%; height: auto;">
+    <img src="assets/json.png" alt="JSON Image" style="max-width: 50%; height: auto;">
+</div>
+
+
 
