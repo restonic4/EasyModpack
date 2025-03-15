@@ -34,6 +34,11 @@ Are you tired of different mods repeating elements or unbalancing your pack's pr
 
 Check the branches to view the source code for each version and loader.
 
+### Incompatibilities
+
+- **TerraBlender:** [If this mod is installed you won't be able to replace biomes](https://github.com/restonic4/EasyModpack/issues/1) (We are working on it, **help needed!**)
+- [Report any incompatibility here!](https://github.com/restonic4/EasyModpack/issues)
+
 ---
 
 ### Demonstrations
@@ -41,9 +46,6 @@ Check the branches to view the source code for each version and loader.
 #### Biome replacer
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 20px; max-width: 100%;">
-    <img src="assets/biomes.gif" alt="Biomes GIF" style="max-width: 50%; height: auto;">
-    <img src="assets/json.png" alt="JSON Image" style="max-width: 50%; height: auto;">
+    <img src="https://raw.githubusercontent.com/restonic4/EasyModpack/master/assets/biomes.gif" alt="Biomes GIF" style="max-width: 50%; height: auto;">
+    <img src="https://raw.githubusercontent.com/restonic4/EasyModpack/master/assets/json.png" alt="JSON Image" style="max-width: 50%; height: auto;">
 </div>
-
-
-
