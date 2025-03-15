@@ -8,4 +8,8 @@ public class PlatformHelper {
     public static Path getConfigDir() {
         return FabricLoader.getInstance().getConfigDir();
     }
+
+    public static boolean isModLoaded(String modId) {
+        return FabricLoader.getInstance().isModLoaded(modId);
+    }
 }

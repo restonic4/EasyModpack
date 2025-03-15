@@ -1,6 +1,6 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -20,7 +20,7 @@ Prevents using items
 public class ItemStackMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void use(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        if (ItemManager.isDisabledUsage(player.getItemInHand(interactionHand).getItem())) {
+        if (EasyModpack.ITEM_MANAGER.isDisabledUsage(player.getItemInHand(interactionHand).getItem())) {
             cir.setReturnValue(InteractionResultHolder.fail(player.getItemInHand(interactionHand)));
             cir.cancel();
         }
@@ -35,7 +35,7 @@ public class ItemStackMixin {
 
         InteractionHand interactionHand = player.getUsedItemHand();
 
-        if (ItemManager.isDisabledUsage(player.getItemInHand(interactionHand).getItem())) {
+        if (EasyModpack.ITEM_MANAGER.isDisabledUsage(player.getItemInHand(interactionHand).getItem())) {
             cir.setReturnValue(InteractionResult.PASS);
             cir.cancel();
         }

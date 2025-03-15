@@ -2,3 +2,6 @@ accessWidener	v1	named
 
 accessible field net/minecraft/world/item/crafting/RecipeManager byName Ljava/util/Map;
 accessible method net/minecraft/world/item/crafting/RecipeManager apply (Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+accessible class net/minecraft/world/level/biome/Climate$RTree
+accessible method net/minecraft/world/level/biome/OverworldBiomeBuilder addBiomes (Ljava/util/function/Consumer;)V
+accessible method net/minecraft/world/level/biome/MultiNoiseBiomeSource parameters ()Lnet/minecraft/world/level/biome/Climate$ParameterList;

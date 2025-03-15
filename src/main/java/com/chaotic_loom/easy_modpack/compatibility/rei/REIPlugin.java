@@ -1,6 +1,7 @@
 package com.chaotic_loom.easy_modpack.compatibility.rei;
 
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
+import com.chaotic_loom.easy_modpack.EasyModpack;
+import com.chaotic_loom.easy_modpack.modules.managers.ItemManager;
 import me.shedaniel.rei.api.client.entry.filtering.base.BasicFilteringRule;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
@@ -17,7 +18,7 @@ public class REIPlugin implements REIClientPlugin {
         Stream<EntryStack<?>> stacks = EntryRegistry.getInstance().getEntryStacks();
 
         stacks.forEach(entryStack -> {
-            if (ItemManager.isDisabled(entryStack.getIdentifier()) | ItemManager.hasReplacement(entryStack.getIdentifier())) {
+            if (EasyModpack.ITEM_MANAGER.isDisabled(entryStack.getIdentifier()) | EasyModpack.ITEM_MANAGER.hasReplacement(entryStack.getIdentifier())) {
                 rule.hide(entryStack);
             }
         });

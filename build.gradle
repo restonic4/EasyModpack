@@ -17,6 +17,7 @@ loom {
 repositories {
     maven { url 'https://api.modrinth.com/maven' }
     maven { url "https://maven.shedaniel.me" }
+    maven { url = 'https://maven.minecraftforge.net/' }
 }
 
 dependencies {
@@ -32,6 +33,9 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${project.rei_version}"
+
+    // TerraBlender compatibility
+    modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.20.1-3.0.1.7'
 }
 
 processResources {

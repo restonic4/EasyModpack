@@ -1,8 +1,8 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.mixin.accessors.RecipeManagerAccessor;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -210,21 +210,21 @@ public class ReloadableServerResourcesMixin {
 
     @Unique
     private boolean isItemDisabled(ResourceLocation itemId) {
-        return ItemManager.isDisabled(itemId);
+        return EasyModpack.ITEM_MANAGER.isDisabled(itemId);
     }
 
     @Unique
     private boolean isRecipeDisabled(ResourceLocation recipeId) {
-        return com.chaotic_loom.easy_modpack.modules.recipes.RecipeManager.isDisabled(recipeId);
+        return EasyModpack.RECIPE_MANAGER.isDisabled(recipeId);
     }
 
     @Unique
     private boolean shouldItemBeReplaced(ResourceLocation itemId) {
-        return ItemManager.hasReplacement(itemId);
+        return EasyModpack.ITEM_MANAGER.hasReplacement(itemId);
     }
 
     @Unique
     private ResourceLocation getItemReplacement(ResourceLocation itemId) {
-        return ItemManager.getReplacement(itemId);
+        return EasyModpack.ITEM_MANAGER.getReplacement(itemId);
     }
 }

@@ -1,7 +1,7 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.blocks.BlockManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.block.Block;
@@ -22,15 +22,15 @@ public class WorldGenRegionMixin {
     private BlockState modifyBlockState(BlockState originalState) {
         ResourceLocation originalId = Utils.getBlockLocation(originalState.getBlock());
 
-        if (BlockManager.isDisabled(originalId)) {
+        if (EasyModpack.BLOCK_MANAGER.isDisabled(originalId)) {
             BlockState replacementState = Blocks.AIR.defaultBlockState();
             copyBlockProperties(originalState, replacementState);
 
             return replacementState;
         }
 
-        if (BlockManager.hasReplacement(originalId)) {
-            ResourceLocation replacementId = BlockManager.getReplacement(originalId);
+        if (EasyModpack.BLOCK_MANAGER.hasReplacement(originalId)) {
+            ResourceLocation replacementId = EasyModpack.BLOCK_MANAGER.getReplacement(originalId);
             Block replacementBlock = Utils.getBlock(replacementId);
 
             if (replacementBlock != null) {

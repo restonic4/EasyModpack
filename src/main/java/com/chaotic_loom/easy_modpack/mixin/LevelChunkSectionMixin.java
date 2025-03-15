@@ -1,7 +1,7 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.blocks.BlockManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -30,15 +30,15 @@ public abstract class LevelChunkSectionMixin {
     private void replaceState(int x, int y, int z, BlockState state, boolean flag, CallbackInfoReturnable<BlockState> cir) {
         ResourceLocation blockId = Utils.getBlockLocation(state.getBlock());
 
-        if (BlockManager.isDisabled(blockId)) {
+        if (EasyModpack.BLOCK_MANAGER.isDisabled(blockId)) {
             BlockState replacementState = Blocks.AIR.defaultBlockState();
             copyBlockProperties(state, replacementState);
 
             cir.setReturnValue(setBlockState(x, y, z, replacementState, flag));
         }
 
-        if (BlockManager.hasReplacement(blockId)) {
-            ResourceLocation replacementId = BlockManager.getReplacement(blockId);
+        if (EasyModpack.BLOCK_MANAGER.hasReplacement(blockId)) {
+            ResourceLocation replacementId = EasyModpack.BLOCK_MANAGER.getReplacement(blockId);
             Block replacementBlock = Utils.getBlock(replacementId);
 
             if (replacementBlock != null) {

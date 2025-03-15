@@ -5,6 +5,6 @@
   "replace_info": "Here you replace blocks with others. The first is the one that is going to be replaced",
   "replace_warning": "If you replace a block like minecraft:stone or minecraft:deepslate, the game will not generate features such as ores. It also breaks the entire overworld generation, because minecraft first creates the shape of the world with minecraft:stone and then it decorates it, but if you replace minecraft:stone by something that can not be decorated such as minecraft:bedrock, then, the entire world will bedrock with no tress, no flowers, just bedrock.",
   "replace": [
-    ["minecraft:super_weird_block", "weird_mod:magic_super_cool_sand"]
+    ["minecraft:sand", "minecraft:oak_planks"]
   ]
 }

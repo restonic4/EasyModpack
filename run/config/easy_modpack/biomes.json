@@ -4,5 +4,6 @@
 
   "replace_info": "Here you replace biomes with others. The first is the one that is going to be replaced",
   "replace": [
+    ["minecraft:forest", "minecraft:desert"]
   ]
 }

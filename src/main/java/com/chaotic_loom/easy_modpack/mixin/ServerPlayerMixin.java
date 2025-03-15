@@ -1,7 +1,7 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,10 +27,10 @@ public class ServerPlayerMixin {
         ServerPlayer player = (ServerPlayer) (Object) this;
         ItemStack item = player.getInventory().getItem(i);
 
-        if (ItemManager.isDisabled(item.getItem())) {
+        if (EasyModpack.ITEM_MANAGER.isDisabled(item.getItem())) {
             item.setCount(0);
-        } else if (ItemManager.hasReplacement(Utils.getItemLocation(item.getItem()))) {
-            ResourceLocation replacement = ItemManager.getReplacement(Utils.getItemLocation(item.getItem()));
+        } else if (EasyModpack.ITEM_MANAGER.hasReplacement(Utils.getItemLocation(item.getItem()))) {
+            ResourceLocation replacement = EasyModpack.ITEM_MANAGER.getReplacement(Utils.getItemLocation(item.getItem()));
 
             ItemStack newItemStack = new ItemStack(Utils.getItem(replacement));
             Utils.copyItemStackProperties(item, newItemStack);

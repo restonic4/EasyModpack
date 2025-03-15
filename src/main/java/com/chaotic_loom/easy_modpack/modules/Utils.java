@@ -1,9 +1,6 @@
 package com.chaotic_loom.easy_modpack.modules;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -11,27 +8,15 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 public class Utils {
-    public static Item getItem(String id) {
-        return BuiltInRegistries.ITEM.get(new ResourceLocation(id));
-    }
-
     public static Item getItem(ResourceLocation id) {
         return BuiltInRegistries.ITEM.get(id);
     }
@@ -71,5 +56,14 @@ public class Utils {
         //newStack.setHoverName(old.getHoverName());
         newStack.setPopTime(old.getPopTime());
         newStack.setRepairCost(old.getBaseRepairCost());
+    }
+
+    public static Holder<Biome> findBiomeByResourceLocation(MinecraftServer server, ResourceLocation biomeId) {
+        if (server != null) {
+            return server.registryAccess().registryOrThrow(Registries.BIOME)
+                    .getHolder(ResourceKey.create(Registries.BIOME, biomeId))
+                    .orElse(null);
+        }
+        return null;
     }
 }

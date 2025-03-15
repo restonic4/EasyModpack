@@ -1,7 +1,7 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -50,7 +50,7 @@ public class MerchantOffersMixin extends ArrayList<MerchantOffer> {
 
     @Unique
     private boolean isItemDisabled(ItemStack stack) {
-        return !stack.isEmpty() && ItemManager.isDisabled(stack.getItem());
+        return !stack.isEmpty() && EasyModpack.ITEM_MANAGER.isDisabled(stack.getItem());
     }
 
     @Unique
@@ -58,8 +58,8 @@ public class MerchantOffersMixin extends ArrayList<MerchantOffer> {
         if (original.isEmpty()) return original;
 
         ResourceLocation originalId = Utils.getItemLocation(original.getItem());
-        if (ItemManager.hasReplacement(originalId)) {
-            Item replacement = Utils.getItem(ItemManager.getReplacement(originalId));
+        if (EasyModpack.ITEM_MANAGER.hasReplacement(originalId)) {
+            Item replacement = Utils.getItem(EasyModpack.ITEM_MANAGER.getReplacement(originalId));
 
             if (replacement != null) {
                 ItemStack newStack = new ItemStack(replacement, original.getCount());

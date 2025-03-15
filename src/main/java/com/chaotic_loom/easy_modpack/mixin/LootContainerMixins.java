@@ -1,13 +1,10 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
-import com.llamalad7.mixinextras.sugar.Local;
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
-import net.minecraft.world.level.storage.loot.LootTable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,8 +25,8 @@ public class LootContainerMixins {
                 )
         )
         private void onUnpackLootTable(Player player, CallbackInfo ci) {
-            ItemManager.removeDisabledItems((Container) (Object) this);
-            ItemManager.replaceItems((Container) (Object) this);
+            EasyModpack.ITEM_MANAGER.removeDisabledItems((Container) (Object) this);
+            EasyModpack.ITEM_MANAGER.replaceItems((Container) (Object) this);
         }
     }
 
@@ -44,8 +41,8 @@ public class LootContainerMixins {
                 )
         )
         private void unpackChestVehicleLootTable(Player player, CallbackInfo ci) {
-            ItemManager.removeDisabledItems((Container) (Object) this);
-            ItemManager.replaceItems((Container) (Object) this);
+            EasyModpack.ITEM_MANAGER.removeDisabledItems((Container) (Object) this);
+            EasyModpack.ITEM_MANAGER.replaceItems((Container) (Object) this);
         }
     }
 }

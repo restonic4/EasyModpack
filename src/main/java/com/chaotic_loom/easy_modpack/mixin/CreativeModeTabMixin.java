@@ -1,7 +1,7 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -27,11 +27,11 @@ public class CreativeModeTabMixin {
     private void removeItems(CreativeModeTab.ItemDisplayParameters displayParameters, CallbackInfo ci) {
         this.displayItems.removeIf(stack -> {
             ResourceLocation itemID = Utils.getItemLocation(stack.getItem());
-            return ItemManager.isDisabled(itemID) || ItemManager.hasReplacement(itemID);
+            return EasyModpack.ITEM_MANAGER.isDisabled(itemID) || EasyModpack.ITEM_MANAGER.hasReplacement(itemID);
         });
         this.displayItemsSearchTab.removeIf(stack -> {
             ResourceLocation itemID = Utils.getItemLocation(stack.getItem());
-            return ItemManager.isDisabled(itemID) || ItemManager.hasReplacement(itemID);
+            return EasyModpack.ITEM_MANAGER.isDisabled(itemID) || EasyModpack.ITEM_MANAGER.hasReplacement(itemID);
         });
     }
 }

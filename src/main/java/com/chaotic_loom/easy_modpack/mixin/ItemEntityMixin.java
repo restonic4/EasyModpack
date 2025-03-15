@@ -1,8 +1,7 @@
 package com.chaotic_loom.easy_modpack.mixin;
 
+import com.chaotic_loom.easy_modpack.EasyModpack;
 import com.chaotic_loom.easy_modpack.modules.Utils;
-import com.chaotic_loom.easy_modpack.modules.items.ItemManager;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -23,12 +22,12 @@ public class ItemEntityMixin {
 
         ResourceLocation itemID = Utils.getItemLocation(itemStack.getItem());
 
-        if (ItemManager.isDisabled(itemID)) {
+        if (EasyModpack.ITEM_MANAGER.isDisabled(itemID)) {
             self.discard();
         }
 
-        if (ItemManager.hasReplacement(itemID)) {
-            ItemStack newItemStack = new ItemStack(Utils.getItem(ItemManager.getReplacement(itemID)));
+        if (EasyModpack.ITEM_MANAGER.hasReplacement(itemID)) {
+            ItemStack newItemStack = new ItemStack(Utils.getItem(EasyModpack.ITEM_MANAGER.getReplacement(itemID)));
             Utils.copyItemStackProperties(itemStack, newItemStack);
 
             self.setItem(newItemStack);
