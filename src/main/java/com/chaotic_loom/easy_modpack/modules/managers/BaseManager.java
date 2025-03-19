@@ -27,6 +27,14 @@ public abstract class BaseManager {
         }
     }
 
+    public void disable(ResourceLocation resourceLocation) {
+        disabledObjects.add(resourceLocation);
+    }
+
+    public void replace(ResourceLocation oldResourceLocation, ResourceLocation newResourceLocation) {
+        replacedObjects.put(oldResourceLocation, newResourceLocation);
+    }
+
     public boolean isDisabled(ResourceLocation location) {
         return disabledObjects.contains(location);
     }
