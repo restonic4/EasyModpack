@@ -31,6 +31,10 @@ public class ItemManager extends BaseManager {
         }
     }
 
+    public void disableUsage(ResourceLocation resourceLocation) {
+        disabledUsageItems.add(resourceLocation);
+    }
+
     public boolean isDisabled(Item result) {
         for (ResourceLocation item : this.disabledObjects) {
             if (BuiltInRegistries.ITEM.getKey(result).equals(item)) {
