@@ -25,13 +25,13 @@
     ]
   },
   "custom": {
-    "modmenu": {
-      "links": {
+    "modmenu:badges": [
+      "library"
+    ],
+      "modmenu": {
+        "links": {
         "modmenu.modrinth": "https://modrinth.com/organization/chaotic-loom"
-      },
-      "badges": [
-        "chaotic_loom"
-      ]
+      }
     }
   },
   "mixins": [
